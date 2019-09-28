@@ -26,17 +26,33 @@
   height: 100px;
 }
 
+.header {
+	height: auto;
+	background-color: #264653;
+	color: white;
+	display: flex; 
+	flex-direction: row;
+	align-items: left;
+}
+
 .content {
   height: 100vh;
-  background-color: #2A9D8F;
+  background-color: #086788;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
 }
 
 .patient-button {
-  width: 130px;
-  margin-bottom: 20px;
+  width: 230px;
+  height: 100px;
+  margin-top: 20px;
+  margin-right: 100px;
+  margin-left: 20px;
+  border-radius: 15px;
+  border-width: 2px;
+  box-shadow: -8px 8px 10px 0 rgba(0,0,0,0.10), -8px 6px 10px 0 rgba(0,0,0,0.10);
 }
 
 .patient-button-name {
@@ -45,6 +61,18 @@
 }
 
 .patient-button-name .btn {
-  border-radius: 0px;
-  width: 100px;
+  background-color: #b6b5bf;
+  height: 100px;
+  width: 200px;
+  font-size: 30px;
+  font-family: sans-serif;
+  border-radius: 15px 0px 0px 15px;
+  border-width: 0px 2px 0px 0px;
+  border-color: black;
+}
+
+.dropdown {
+	width: 350px;
+	font-family: sans-serif;
+	font-size: 25px;
 }

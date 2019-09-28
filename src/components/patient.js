@@ -12,11 +12,11 @@ class Patient extends React.Component {
                     <DropdownToggle>
                         {patient.name}
                     </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem>{patient.name}</DropdownItem>
-                        <DropdownItem>{patient.temperature}</DropdownItem>
-                        <DropdownItem>{patient.pulse}</DropdownItem>
-                        <DropdownItem>{patient.respiration}</DropdownItem>
+                    <DropdownMenu className = "dropdown">
+                        <DropdownItem><b>Name:</b> {patient.name}</DropdownItem>
+                        <DropdownItem><b>Temp:</b> {patient.temperature}</DropdownItem>
+                        <DropdownItem><b>Pulse:</b> {patient.pulse}</DropdownItem>
+                        <DropdownItem><b>Resp:</b> {patient.respiration}</DropdownItem>
                     </DropdownMenu>
                 </UncontrolledButtonDropdown>
             </div>

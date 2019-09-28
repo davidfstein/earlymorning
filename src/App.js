@@ -21,7 +21,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.getPatients();
-    this.pollPatients();
+    //this.pollPatients();
   }
 
   pollPatients = () => {
@@ -149,14 +149,11 @@ class App extends React.Component {
         <Navbar>
           <NavbarBrand href="/" className="mr-auto">Early Morning</NavbarBrand>
             <Nav>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
             </Nav>
         </Navbar>
+		<div className='header'>
+			<h1> Patient Status : MEWS </h1>
+		</div>
         <div className='content'>
           {this.state.patients}
         </div>
