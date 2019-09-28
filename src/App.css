@@ -29,4 +29,22 @@
 .content {
   height: 100vh;
   background-color: #2A9D8F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.patient-button {
+  width: 130px;
+  margin-bottom: 20px;
+}
+
+.patient-button-name {
+  float: left;
+  
+}
+
+.patient-button-name .btn {
+  border-radius: 0px;
+  width: 100px;
 }

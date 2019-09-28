@@ -7,6 +7,7 @@ import {
   NavLink,
   } from 'reactstrap';
 import PatientServiceClient from './services/patient-service';
+import Patient from './components/patient';
 import './App.css';
 
 class App extends React.Component {
@@ -20,7 +21,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.getPatients();
-    // this.pollPatients();
+    this.pollPatients();
   }
 
   pollPatients = () => {
@@ -46,9 +47,7 @@ class App extends React.Component {
     const patient_divs = Array.from(sortedPatients.map((patient, _) => {
         const mew = this.calculateMews(patient);
         const color = this.colorByMew(mew);
-        return <div style={{backgroundColor: color}}>
-          {patient.name}, {mew}
-        </div>
+        return <Patient patient={patient} color={color} />
     }));
     await this.setState({
       patients: patient_divs
