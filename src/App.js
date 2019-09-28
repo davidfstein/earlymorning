@@ -15,13 +15,14 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
+      patientHistory: [],
       patients: []
     }
   }
 
   componentDidMount = () => {
     this.getPatients();
-    //this.pollPatients();
+    this.pollPatients();
   }
 
   pollPatients = () => {
@@ -42,6 +43,15 @@ class App extends React.Component {
 
   getPatients = async () => {
     const patients = await new PatientServiceClient().getPatients();
+    patients.forEach((patient, _) => {
+      if (this.state.patientHistory) {
+        this.state.patientHistory.forEach(async (p, _) => {
+          if (patient.name == p.name && this.calculateMews(patient) >= 4 && this.calculateMews(p) < 4) {
+            await new PatientServiceClient().sendMessage(patient.name);
+          }
+        })
+      }
+    });
     const sortedPatients = this.sortPatientsByMew(patients);
     const patientDivs = Array.from(
         sortedPatients.map((patient, _) => {
@@ -51,6 +61,9 @@ class App extends React.Component {
           }
         )
     );
+    this.setState({
+      patientHistory: patients,
+    });
     this.setState({
       patients: patientDivs,
     });
