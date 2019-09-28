@@ -25,7 +25,7 @@ class App extends React.Component {
   }
 
   pollPatients = () => {
-    setTimeout(this.getPatients(), 1000);
+    setInterval(this.getPatients, 1000);
   }
 
   colorByMew = (mew) => {
@@ -42,16 +42,18 @@ class App extends React.Component {
 
   getPatients = async () => {
     const patients = await new PatientServiceClient().getPatients();
-    console.log(patients)
     const sortedPatients = this.sortPatientsByMew(patients);
-    const patient_divs = Array.from(sortedPatients.map((patient, _) => {
-        const mew = this.calculateMews(patient);
-        const color = this.colorByMew(mew);
-        return <Patient patient={patient} color={color} />
-    }));
-    await this.setState({
-      patients: patient_divs
-    })
+    const patientDivs = Array.from(
+        sortedPatients.map((patient, _) => {
+            const mew = this.calculateMews(patient);
+            const color =  this.colorByMew(mew);
+            return <Patient patient={patient} color={color} />
+          }
+        )
+    );
+    this.setState({
+      patients: patientDivs,
+    });
   }   
 
   sortPatientsByMew = (patients) => {
@@ -67,10 +69,9 @@ class App extends React.Component {
 
   calculateMews = (patient) => { 
     // from smart band
-    const pulse = patient.pulse;
-    const respiration = patient.respiration;
-    const temperature = patient.temperature;
-    console.log(pulse, respiration, temperature)
+    const pulse = patient.pulse[patient.pulse.length - 1];
+    const respiration = patient.respiration[patient.respiration.length - 1];
+    const temperature = patient.temperature[patient.temperature.length - 1];
     
     // entered by nurse
     const blood_pressure = null;
@@ -81,17 +82,22 @@ class App extends React.Component {
   
     let mews = 0; 
   
-    if(pulse <= 40) {
+    if (pulse <= 40) {
       mews += 2;
-    } else if(pulse >= 41 && pulse <= 50) {
+    } 
+    else if (pulse >= 41 && pulse <= 50) {
       mews += 1;
-    } else if(pulse >= 51 && pulse <= 100) {
+    } 
+    else if (pulse >= 51 && pulse <= 100) {
       mews += 0;
-    } else if(pulse >= 101 && pulse <= 110) {
+    } 
+    else if (pulse >= 101 && pulse <= 110) {
       mews += 1;
-    } else if(pulse >= 111 && pulse <= 129) {
+    } 
+    else if (pulse >= 111 && pulse <= 129) {
       mews += 2;
-    } else {
+    } 
+    else {
       mews += 3;
     }
   
@@ -108,19 +114,19 @@ class App extends React.Component {
     }
   
     // Only include if we have blood pressure
-    if (blood_pressure) {
-      if(blood_pressure <= 70) {
-        mews += 3;
-      } else if(blood_pressure >= 71 && blood_pressure <= 80) {
-        mews += 2;
-      } else if(blood_pressure >= 81 && blood_pressure <= 100) {
-        mews += 1;
-      } else if(blood_pressure >= 101 && blood_pressure <= 199) {
-        mews += 0;
-      } else if(blood_pressure >= 200) {
-        mews += 2;
-      }
-    }
+    // if (blood_pressure) {
+    //   if(blood_pressure <= 70) {
+    //     mews += 3;
+    //   } else if(blood_pressure >= 71 && blood_pressure <= 80) {
+    //     mews += 2;
+    //   } else if(blood_pressure >= 81 && blood_pressure <= 100) {
+    //     mews += 1;
+    //   } else if(blood_pressure >= 101 && blood_pressure <= 199) {
+    //     mews += 0;
+    //   } else if(blood_pressure >= 200) {
+    //     mews += 2;
+    //   }
+    // }
   
     if(temperature <= 35) {
       mews += 2;
