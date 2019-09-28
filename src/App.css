@@ -17,6 +17,16 @@
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.navbar a {
+  color: white;
+}
+
+.navbar {
+  background-color: #264653;
+  height: 100px;
+}
+
+.content {
+  height: 100vh;
+  background-color: #2A9D8F;
 }
